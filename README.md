@@ -98,7 +98,7 @@ Classification Metrics Report - 4 Basic Models
 ========================================================================================================================
 ```
 **Tuning:** 
-Then we performed Hyperparameter Tuning and Grid Search with Cross-validation
+Then we performed Hyperparameter Tuning using a pipeline with Grid Search and Cross-validation
 - Note: To address the class imbalance observed in previous sections, we will include `class_weight="balanced"` (for the models that support it). That option reweights the loss so that the minority class (successful term-deposit subscription) counts more.
 - For performance evaluation, we will use **F1 for the positive class**
 
