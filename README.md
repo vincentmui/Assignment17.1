@@ -1,14 +1,14 @@
 ## Comparing Classifiers: Bank Direct Marketing Campaigns
 Link to [the notebook] https://github.com/vincentmui/Assignment17.1/blob/main/assignment-17.1-vincent.ipynb 
-#### Overview
+### Overview
 This practical application compares the performance of 4 classifiers: K Nearest Neighbor (KNN), Logistic Regression, Decision Trees, and Support Vector Machines (SVM).  
 
-#### Data Source
+### Data Source
 Our dataset comes from the UCI Machine Learning repository: (https://archive.ics.uci.edu/ml/datasets/bank+marketing ).  The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be ('yes') or not ('no') subscribed
 According to the **Materials and Methods** section of the paper *USING DATA MINING FOR BANK DIRECT MARKETING: AN APPLICATION OF THE CRISP-DM METHODOLOGY* [Moro et al., 2014], the bank direct marketing data represent **17 campaigns** that occurred between May 2008 and November 2010, corresponding to a total of 79,354 contacts. For each contact, a large number of attributes was stored and if there was a success (successful subscription to term deposit, the target variable y).  Data were collected from a Portuguese bank that used its own contact-center to do directed marketing campaigns by telephone.
 The paper states there were 6,499 successes (8% success rate) with the original dataset. We will explore this rate again in the "Understanding the Features" section, because we are using different version of the bank dataset: 'bank-additional-full.csv' with all examples (41188) and 20 inputs, ordered by date (from May 2008 to November 2010), but still very close to the data analyzed in [Moro et al., 2014].
 
-#### Data Understanding
+### Data Understanding
 The dataset has 41,188 rows and 21 columns
 ```
 # bank client data:
@@ -39,7 +39,7 @@ The dataset has 41,188 rows and 21 columns
 Output variable (desired target):
 21 - y - has the client subscribed a term deposit? (binary: 'yes','no')
 ```
-#### Business Objective
+### Business Objective
 
 **How should the bank prioritize campaign phone calls to sell term-deposits?**
 The business objective for the banks is to improve directed marketing campaigns efficiency to save costs and time – reduce phone contacts, but improve the number of successes (clients subscribing the deposit). To achieve this objective, banks need to effectively prioritize their time and effort on contacts with the high responders to successfully sell deposit products.
@@ -50,16 +50,13 @@ Also note from the chart below that the overall successful deposit subscription 
 
 ![](images/target_count.png)
 
-#### Data Preparation: Data Cleaning and Transformation
+### Data Preparation: Data Cleaning and Transformation
 Steps to construct final dataset prior to modeling:
 
 Drop "duration" and "pdays" columns that are not useful for predictions:
 Feature Engineering
 - Drop missing values that were coded as "unknown"
-- Some categorical columns are boolean; after taking out "unknown" values, convert remaining yes/no str values to 1/0 and pass them straight through:
-  - "default"
-  - "housing"
-  - "loan"
+- Some categorical columns are boolean; after taking out "unknown" values, convert remaining yes/no str values to 1/0 and pass them straight through: `default, housing, loan`
 Encoding
 - Apply OneHotEncoder to categorical columns for regression models
 
@@ -71,7 +68,7 @@ Scaling
 Cross-validation 
 - Train / Test Split: create a holdout "test set" for cross-validation to assess models' performance
 
-#### Modelling
+### Modelling
 **Simple Model:** We started with fitting a simple Logistic Regression model:
 ```
 Train set accuracy score: 88.42%
@@ -114,7 +111,7 @@ Hyperparameter Tuning Report - Metrics for each 'Best' Model
 3  SVM (Gaussian kernel)           278.1  0.4924         0.8235          0.3974       0.6487   0.4929        0.7799
 ========================================================================================================================
 ```
-#### Evaluation
+### Evaluation
 **Classifier Model Evaluation at First Glance**
 For our 4 basic models, SVM with a Gaussian kernel performs best in terms of Test Accuracy (0.8855). 
 
@@ -157,7 +154,7 @@ Hyperparameter Tuning Report - Metrics for each 'Best' Model
 - In addition, 3 of our 4 tuned models (Logistic Regression, Decision Tree, SVM) almost overlap with each other on the ROC curve, but our KNN model sits below the others across the whole range, implying it is inferior to the other 3 models. 
 ![](tuned_roc_pr)
 
-#### Recommendations to the business
+### Recommendations to the Business
 Banks need to effectively prioritize their time and effort on contacts according to the following factors to successfully sell deposit products.
 ![](c_matrix_svm)
 ![](svm_imp)
@@ -180,7 +177,7 @@ Banks need to effectively prioritize their time and effort on contacts according
 - Somehow our model shows other client demographics variables are not that useful in deciding successful subscriptions. E.g., education, housing, load, marital status, etc.  Business is advised to use mainly “previous campaign outcome” as the main individual client’s predictor.
 
 
-#### Next Steps / Deployment
+### Next Steps / Deployment
 1. Business Priority: Deploy the tuned SVM model to production. Bank Marketing Team should determine what to prioritize in marketing campaign: 
 - Reduce False Positives to reduce contact calls and save cost (measured by Precision Score), or 
 - Reduce False Negatives to improve subscription rates (measured by Recall Score)
