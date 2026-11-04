@@ -180,7 +180,7 @@ Banks need to effectively prioritize their time and effort on contacts according
 - Somehow our model shows other client demographics variables are not that useful in deciding successful subscriptions. E.g., education, housing, load, marital status, etc.  Business is advised to use mainly “previous campaign outcome” as the main individual client’s predictor.
 
 
-### Next Steps / Deployment
+### Next Steps
 1. Business Priority: Deploy the tuned SVM model to production. Bank Marketing Team should determine what to prioritize in marketing campaign: 
   - Reduce False Positives to reduce contact calls and save cost (measured by Precision Score), or 
   - Reduce False Negatives to improve subscription rates (measured by Recall Score)
@@ -189,4 +189,9 @@ Then use the mode’s Confusion Matrix to guide effectiveness
 3. Yearly Trend: Successful Subscription percentage rose over the years, although the total number of calls fell. Therefore the business team has done something right to improve subscription rates year-over-year.  This trend deserves further investigations, as a trend analysis (in addition to classifier model evaluation). And we should continue yearly data analysis, on top of monthly data.
 5. Additional Classifier Models: in addition to the 4 classifier model types compared in the exercise, we should also explore using Ensemble techniques (Module 20), e.g., Random Forests and Boosting. Also, we used default kernel (rbf or Gaussian) for SVM tuning in this exercise; we should also explore other kernels (linear, ploy, sigmoid) in future. 
 This may improve our predictions, because our 3 current tuned models are similar in terms of F1 Scores.
+
+### Deployment
+- This jupyter notebook can be run in Pyhton 3.14.3 or above envinment
+- The \data subdirectory has the source data
+- The \images subdirectory contain images and plots
 
