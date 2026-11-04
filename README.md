@@ -6,7 +6,7 @@ This practical application compares the performance of 4 classifiers: K Nearest 
 ### Data Source
 Our dataset comes from the UCI Machine Learning repository: (https://archive.ics.uci.edu/ml/datasets/bank+marketing ).  The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be ('yes') or not ('no') subscribed
 According to the **Materials and Methods** section of the paper *USING DATA MINING FOR BANK DIRECT MARKETING: AN APPLICATION OF THE CRISP-DM METHODOLOGY* [Moro et al., 2014], the bank direct marketing data represent **17 campaigns** that occurred between May 2008 and November 2010, corresponding to a total of 79,354 contacts. For each contact, a large number of attributes was stored and if there was a success (successful subscription to term deposit, the target variable y).  Data were collected from a Portuguese bank that used its own contact-center to do directed marketing campaigns by telephone.
-The paper states there were 6,499 successes (8% success rate) with the original dataset. We will explore this rate again in the "Understanding the Features" section, because we are using different version of the bank dataset: 'bank-additional-full.csv' with all examples (41188) and 20 inputs, ordered by date (from May 2008 to November 2010), but still very close to the data analyzed in [Moro et al., 2014].
+The paper states there were 6,499 successes (8% success rate) with the original dataset. We will explore this rate again in the "Understanding the Features" section, because we are using different version of the bank dataset: 'bank-additional-full.csv' with all examples (41,188) and 20 inputs, ordered by date (from May 2008 to November 2010), but still very close to the data analyzed in [Moro et al., 2014].
 
 ### Data Understanding
 The dataset has 41,188 rows and 21 columns
@@ -61,10 +61,11 @@ Encoding
 - Apply OneHotEncoder to categorical columns for regression models
 
 Outliers
-- Apply Interquartile range (IQR = 𝑄3 − 𝑄1 ) to detect outliers for elimination
-- Apply to numeric columns "campaign"
+- Apply Interquartile range (IQR = 𝑄3 − 𝑄1 ) to detect outliers for elimination e.g., `campaign` column
+
 Scaling
 - Data scaling will be performed, because both KNN and the RBF support vector machine depend on distances
+
 Cross-validation 
 - Train / Test Split: create a holdout "test set" for cross-validation to assess models' performance
 
