@@ -72,7 +72,7 @@ Cross-validation
 - Train / Test Split: create a holdout "test set" for cross-validation to assess models' performance
 
 #### Modelling
-** Simple Model: ** We started with fitting a simple Logistic Regression model:
+**Simple Model:** We started with fitting a simple Logistic Regression model:
 ```
 Train set accuracy score: 88.42%
 Test set accuracy score: 88.39%
@@ -85,7 +85,7 @@ support          8052.0000     1227.0000    0.8839  9279.0000     9279.0000
 ----------------------------------------------------------------------------------------------------
 ROC AUC: 0.793
 ```
-** 4 Basic Models:** Next we compared the performance of the simple Logistic Regression model to our KNN algorithm, Decision Tree, and SVM models, using the default settings for each of the models.
+**4 Basic Models:** Next we compared the performance of the simple Logistic Regression model to our KNN algorithm, Decision Tree, and SVM models, using the default settings for each of the models.
 
 
 ``` 
@@ -106,38 +106,38 @@ Then we performed Hyperparameter Tuning and Grid Search with Cross-validation
 
 ```
 Hyperparameter Tuning Report - Metrics for each 'Best' Model
-
 ========================================================================================================================
                    Model  Search Time(s)   CV F1  Test Accuracy  Test Precision  Test Recall  Test F1  Test ROC AUC
 0    Logistic Regression            11.0  0.4773         0.8029          0.3657       0.6683   0.4728        0.7928
 1    K-Nearest Neighbors            12.3  0.3755         0.8622          0.4686       0.3162   0.3776        0.7252
 2          Decision Tree             6.6  0.5004         0.8439          0.4340       0.5925   0.5010        0.7763
 3  SVM (Gaussian kernel)           278.1  0.4924         0.8235          0.3974       0.6487   0.4929        0.7799
+========================================================================================================================
 ```
 #### Evaluation
-** Classifier Model Evaluation at First Glance **
+**Classifier Model Evaluation at First Glance**
 For our 4 basic models, SVM with a Gaussian kernel performs best in terms of Test Accuracy (0.8855). 
 
-Target Class is highly imbalanced 
+**Target Class is highly imbalanced**
 - The confusion matrix and other data exploration metrics confirm that our target classes (Yes/No on term-deposit subscriptions) are highly imbalanced
 
-Accuracy Score is not a good classifier evaluation metric for this scenario.
+**Accuracy Score is not a good classifier evaluation metric for this scenario**
 This is due to the imbalance in target class. Also, Test Accuracy varies very less across the 4 basic models, so does not help in choosing a model. KNN has the second lowest Test Accuracy score of the four models, but the highest F1-Score for positive class.  This again demonstrates that ranking these models based on Accuracy alone is not sufficient.  Even worse, our hyperparameter tuning exercise did not improve Accuracy Scores much; in fact it degraded 3 out of the 4 default models!
 
-F1-Score is used as our model evaluation metric
+**F1-Score is used as our model evaluation metric**
 - Instead of using Accuracy Score, we use F1-Score for the positive class, as a weighted average of both Precision and Recall
 
-Tuning improved F1-Scores for 3 Classifier types only, reaching a plateau
+**Tuning improved F1-Scores for 3 Classifier types only, reaching a plateau**
 - Our hyperparameter tuning exercise improved F1-Scores for 3 out of the 4 model types: Logistic Regression, Decision Tree and SVM, but reached a plateau (0.47 to 0.50). This implies all three tuned models extract about the same amount of signal from the Bank information data, and the signal ceiling is set by the features rather than by the machine learning algorithm. 
 - Tuning improves F1 more than it improves Accuracy Scores
 
 ![](images/tuned_f1_plot.png)
 
-SVM with Gaussian kernel is our model of choice
+**SVM with Gaussian kernel is our model of choice**
 - SVM produces a good F1 score given the class imbalance in our case
 - Our tuned SVM model has bad Precision but good Recall, therefore combined into a good F1 score
 - Tradeoff is that SVM models usually run slower than the other models
-- 
+~~~
 ========================================================================================================================
 Hyperparameter Tuning Report - Metrics for each 'Best' Model
 ========================================================================================================================
@@ -147,10 +147,12 @@ Hyperparameter Tuning Report - Metrics for each 'Best' Model
 2    Decision Tree             6.9  	0.5004       0.8439          0.4340       0.5925     0.5010        0.7763
 3  SVM (Gaussian kernel)       277.0  	0.4924       0.8235          0.3974       0.6487     0.4929        0.7799
 ========================================================================================================================
-Tuned Decision Tree is best on paper but not good in practice
+~~~
+
+**Tuned Decision Tree is best on paper but not good in practice**
 - Our tuned Decision Tree model resulted in the best Test Set F1-Score, but with the tuned hyperparameter tree depth = 7 is impossible to read, therefore impractical to explain to the bank business marketing team
 
-K-Nearest Neighbors (KNN) is the worst choice for this scenario
+**K-Nearest Neighbors (KNN) is the worst choice for this scenario**
 - Our default and tuned KNN models report the same lowest F1-Score.
 - In addition, 3 of our 4 tuned models (Logistic Regression, Decision Tree, SVM) almost overlap with each other on the ROC curve, but our KNN model sits below the others across the whole range, implying it is inferior to the other 3 models. 
 ![](tuned_roc_pr)
@@ -174,7 +176,7 @@ Banks need to effectively prioritize their time and effort on contacts according
 **Last call duration can be deceiving**
 - Last call duration and the number of previous calls may show strong relationship with target outcome, but they impact negative subscriptions more than positive subscriptions, therefore both are not good predictors of successful subscriptions.
 
-**Client demographics may not be the main driver**
+**Client demographics may not be the main driver** 
 - Somehow our model shows other client demographics variables are not that useful in deciding successful subscriptions. E.g., education, housing, load, marital status, etc.  Business is advised to use mainly “previous campaign outcome” as the main individual client’s predictor.
 
 
