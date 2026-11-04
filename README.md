@@ -120,7 +120,9 @@ For our 4 basic models, SVM with a Gaussian kernel performs best in terms of Tes
 - The confusion matrix and other data exploration metrics confirm that our target classes (Yes/No on term-deposit subscriptions) are highly imbalanced
 
 **Accuracy Score is not a good classifier evaluation metric for this scenario**
-This is due to the imbalance in target class. Also, Test Accuracy varies very less across the 4 basic models, so does not help in choosing a model. KNN has the second lowest Test Accuracy score of the four models, but the highest F1-Score for positive class.  This again demonstrates that ranking these models based on Accuracy alone is not sufficient.  Even worse, our hyperparameter tuning exercise did not improve Accuracy Scores much; in fact it degraded 3 out of the 4 default models!
+- This is due to the imbalance in target class. Also, Test Accuracy varies very less across the 4 basic models, so does not help in choosing a model.
+- KNN has the second lowest Test Accuracy score of the four models, but the highest F1-Score for positive class.  This again demonstrates that ranking these models based on Accuracy alone is not sufficient.
+- Even worse, our hyperparameter tuning exercise did not improve Accuracy Scores much; in fact it degraded 3 out of the 4 default models!
 
 **F1-Score is used as our model evaluation metric**
 - Instead of using Accuracy Score, we use F1-Score for the positive class, as a weighted average of both Precision and Recall
@@ -180,8 +182,8 @@ Banks need to effectively prioritize their time and effort on contacts according
 
 ### Next Steps / Deployment
 1. Business Priority: Deploy the tuned SVM model to production. Bank Marketing Team should determine what to prioritize in marketing campaign: 
-- Reduce False Positives to reduce contact calls and save cost (measured by Precision Score), or 
-- Reduce False Negatives to improve subscription rates (measured by Recall Score)
+  - Reduce False Positives to reduce contact calls and save cost (measured by Precision Score), or 
+  - Reduce False Negatives to improve subscription rates (measured by Recall Score)
 Then use the mode’s Confusion Matrix to guide effectiveness
 2. Monthly Data: Data for months of Jan and Feb are missing. Marketing team should gather those data to refit the model pipeline, in order to form a more complete picture and to evaluate/improve model for predictions. Current model is fitted based on data when a campaign call happened, therefore data was not recorded when no calls were made.
 3. Yearly Trend: Successful Subscription percentage rose over the years, although the total number of calls fell. Therefore the business team has done something right to improve subscription rates year-over-year.  This trend deserves further investigations, as a trend analysis (in addition to classifier model evaluation). And we should continue yearly data analysis, on top of monthly data.
